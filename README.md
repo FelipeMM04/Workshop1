@@ -60,7 +60,8 @@ The grain of the fact table is **one row per technical candidate evaluation even
 ```mermaid
 erDiagram
     dim_date {
-        int date_key PK
+        int date_sk PK
+        date full_date
         int year
         int month
         int day
@@ -68,30 +69,39 @@ erDiagram
     }
 
     dim_technology {
-        int technology_key PK
+        int technology_sk PK
         string technology_name
         string seniority
     }
 
     dim_candidate {
-        int candidate_key PK
-        int candidate_id
-        string location
+        int candidate_sk PK
+        string first_name
+        string last_name
+        string email
+    }
+
+    dim_location {
+        int location_sk PK
+        string country
     }
 
     fact_candidate_evaluations {
         int evaluation_id PK
-        int date_key FK
-        int technology_key FK
-        int candidate_key FK
-        float score
-        int is_hired
+        int candidate_sk FK
+        int technology_sk FK
+        int location_sk FK
+        int application_date_sk FK
+        int years_of_experience
+        int code_challenge_score
+        int technical_interview_score
+        tinyint is_hired
     }
 
     dim_date ||--o{ fact_candidate_evaluations : "1 : N"
     dim_technology ||--o{ fact_candidate_evaluations : "1 : N"
     dim_candidate ||--o{ fact_candidate_evaluations : "1 : N"
-
+    dim_location ||--o{ fact_candidate_evaluations : "1 : N"
     ---
 
 ## 10. Explanation of Dimensions and Facts
