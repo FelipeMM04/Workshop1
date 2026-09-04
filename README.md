@@ -183,12 +183,15 @@ JOIN dim_technology t ON f.technology_sk = t.technology_sk
 GROUP BY t.seniority
 ORDER BY total_hires DESC;
 
-Requirement,Implemented?,DW Tables Used,Query / KPI,Main Finding
-R1,Yes,"fact_candidate_evaluations, dim_date",SUM(is_hired) aggregated by year,Hiring volume grew steadily across historical periods.
-R2,Yes,"fact_candidate_evaluations, dim_technology",SUM(is_hired) grouped by technology_name,Core technology stacks register the highest total volume of hires.
-R3,Yes,"fact_candidate_evaluations, dim_location",COUNT(evaluation_id) by location,Evaluation volumes and scores vary across geographic regions.
-R4,Yes,"fact_candidate_evaluations, dim_technology",SUM(is_hired) grouped by seniority,Hires show robust distribution across experience levels.
-R5,Yes,fact_candidate_evaluations,AVG(score) / is_hired correlation,Higher technical scores directly align with successful hiring outcomes.
+## 16. Main Business Findings & Validation Matrix
+
+| Requirement | Implemented? | DW Tables Used | Query / KPI | Main Finding |
+| :--- | :---: | :--- | :--- | :--- |
+| **R1** | **Yes** | `fact_candidate_evaluations`, `dim_date` | `SUM(is_hired)` aggregated by year | Hiring volume grew steadily across historical periods. |
+| **R2** | **Yes** | `fact_candidate_evaluations`, `dim_technology` | `SUM(is_hired)` grouped by technology_name | Core technology stacks register the highest total volume of hires. |
+| **R3** | **Yes** | `fact_candidate_evaluations`, `dim_location` | `COUNT(evaluation_id)` by location | Evaluation volumes and scores vary across geographic regions. |
+| **R4** | **Yes** | `fact_candidate_evaluations`, `dim_technology` | `SUM(is_hired)` grouped by seniority | Hires show robust distribution across experience levels. |
+| **R5** | **Yes** | `fact_candidate_evaluations` | `AVG(score)` / `is_hired` correlation | Higher technical scores directly align with successful hiring outcomes. |
 
 17. Analytical Evaluation Questions
 Does the final Data Warehouse provide enough information to satisfy all five business requirements? Yes. The Kimball dimensional model (kimball_dw) stores all core metrics and dimensional slices needed to fully answer R1–R5.
