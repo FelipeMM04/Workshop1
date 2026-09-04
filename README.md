@@ -101,7 +101,7 @@ erDiagram
     dim_candidate ||--o{ fact_candidate_evaluations : "1 : N"
     dim_location ||--o{ fact_candidate_evaluations : "1 : N"
 
-    10. Explanation of Dimensions and Facts
+10. Explanation of Dimensions and Facts
 Fact Table
 fact_candidate_evaluations: Stores numerical measures (score, is_hired) and foreign keys referencing surrogate keys in the dimension tables.
 
@@ -149,7 +149,6 @@ Power BI Desktop.
 
 Step-by-Step Execution
 Clone the Repository:
-
 git clone [https://github.com/FelipeMM04/Workshop1.git](https://github.com/FelipeMM04/Workshop1.git)
 cd Workshop1
 
@@ -161,7 +160,6 @@ python src/main.py
 Open Power BI Report: Explore visual reports using the generated star schema.
 
 15. Analytical Queries and KPIs
-
 -- KPI 1: Annual Hires (R1)
 SELECT d.year, SUM(f.is_hired) AS total_hires
 FROM fact_candidate_evaluations f
@@ -183,7 +181,12 @@ JOIN dim_technology t ON f.technology_sk = t.technology_sk
 GROUP BY t.seniority
 ORDER BY total_hires DESC;
 
-16. Main Business Findings & Validation MatrixRequirementImplemented?DW Tables UsedQuery / KPIMain FindingR1Yesfact_candidate_evaluations, dim_dateSUM(is_hired) aggregated by yearHiring volume grew steadily across historical periods.R2Yesfact_candidate_evaluations, dim_technologySUM(is_hired) grouped by technology_nameCore technology stacks register the highest total volume of hires.R3Yesfact_candidate_evaluations, dim_locationCOUNT(evaluation_id) by locationEvaluation volumes and scores vary across geographic regions.R4Yesfact_candidate_evaluations, dim_technologySUM(is_hired) grouped by seniorityHires show robust distribution across experience levels.R5Yesfact_candidate_evaluationsAVG(score) / is_hired correlationHigher technical scores
+Requirement,Implemented?,DW Tables Used,Query / KPI,Main Finding
+R1,Yes,"fact_candidate_evaluations, dim_date",SUM(is_hired) aggregated by year,Hiring volume grew steadily across historical periods.
+R2,Yes,"fact_candidate_evaluations, dim_technology",SUM(is_hired) grouped by technology_name,Core technology stacks register the highest total volume of hires.
+R3,Yes,"fact_candidate_evaluations, dim_location",COUNT(evaluation_id) by location,Evaluation volumes and scores vary across geographic regions.
+R4,Yes,"fact_candidate_evaluations, dim_technology",SUM(is_hired) grouped by seniority,Hires show robust distribution across experience levels.
+R5,Yes,fact_candidate_evaluations,AVG(score) / is_hired correlation,Higher technical scores directly align with successful hiring outcomes.
 
 17. Analytical Evaluation Questions
 Does the final Data Warehouse provide enough information to satisfy all five business requirements? Yes. The Kimball dimensional model (kimball_dw) stores all core metrics and dimensional slices needed to fully answer R1–R5.
