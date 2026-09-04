@@ -162,7 +162,9 @@ python src/main.py
 Open Power BI Report: Explore visual reports using the generated star schema.
 
 ## 15. Analytical Queries and KPIs
--- KPI 1: Annual Hires (R1)
+
+### KPI 1: Annual Hires (R1)
+```sql
 SELECT d.year, SUM(f.is_hired) AS total_hires
 FROM fact_candidate_evaluations f
 JOIN dim_date d ON f.application_date_sk = d.date_sk
