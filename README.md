@@ -102,7 +102,7 @@ erDiagram
     dim_technology ||--o{ fact_candidate_evaluations : "1 : N"
     dim_candidate ||--o{ fact_candidate_evaluations : "1 : N"
     dim_location ||--o{ fact_candidate_evaluations : "1 : N"
-    ---
+    ```
 
 ## 10. Explanation of Dimensions and Facts
 
