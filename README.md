@@ -185,6 +185,8 @@ JOIN dim_technology t ON f.technology_sk = t.technology_sk
 GROUP BY t.seniority
 ORDER BY total_hires DESC;
 
+```
+
 ## 16. Main Business Findings & Validation Matrix
 
 | Requirement | Implemented? | DW Tables Used | Query / KPI | Main Finding |
