@@ -103,7 +103,7 @@ erDiagram
 
 ```
 
-10. Explanation of Dimensions and Facts
+## 10. Explanation of Dimensions and Facts
 Fact Table
 fact_candidate_evaluations: Stores numerical measures (score, is_hired) and foreign keys referencing surrogate keys in the dimension tables.
 
@@ -116,7 +116,7 @@ dim_candidate: Stores candidate demographic attributes.
 
 dim_location: Stores country location details.
 
-11. ETL Architecture
+## 11. ETL Architecture
 The ETL process follows a Python/SQL pipeline:
 
 Extract: Reads raw candidate evaluation records from CSV source files.
@@ -125,14 +125,14 @@ Transform: Cleans data, normalizes text columns, generates surrogate keys, and d
 
 Load: Populates dimension tables first and then loads facts into the kimball_dw database in MySQL.
 
-12. Main Transformation Decisions
+## 12. Main Transformation Decisions
 Surrogate Key Generation: Created integer surrogate keys (date_sk, technology_sk, candidate_sk, location_sk) to decouple the DW from operational IDs.
 
 Data Type Enforcement: Converted evaluation scores and hiring indicators to uniform numerical types.
 
 Null Handling: Assigned default values for missing dimensional attributes.
 
-13. Technologies
+## 13. Technologies
 Database: MySQL Server
 
 ETL Engine: Python (Pandas, SQLAlchemy) / SQL
@@ -141,7 +141,7 @@ BI & Data Visualization: Microsoft Power BI
 
 Version Control: Git & GitHub
 
-14. Instructions to Run the Project
+## 14. Instructions to Run the Project
 Prerequisites
 MySQL Server running locally or remotely.
 
@@ -161,7 +161,7 @@ python src/main.py
 
 Open Power BI Report: Explore visual reports using the generated star schema.
 
-15. Analytical Queries and KPIs
+## 15. Analytical Queries and KPIs
 -- KPI 1: Annual Hires (R1)
 SELECT d.year, SUM(f.is_hired) AS total_hires
 FROM fact_candidate_evaluations f
@@ -193,7 +193,7 @@ ORDER BY total_hires DESC;
 | **R4** | **Yes** | `fact_candidate_evaluations`, `dim_technology` | `SUM(is_hired)` grouped by seniority | Hires show robust distribution across experience levels. |
 | **R5** | **Yes** | `fact_candidate_evaluations` | `AVG(score)` / `is_hired` correlation | Higher technical scores directly align with successful hiring outcomes. |
 
-17. Analytical Evaluation Questions
+## 17. Analytical Evaluation Questions
 Does the final Data Warehouse provide enough information to satisfy all five business requirements? Yes. The Kimball dimensional model (kimball_dw) stores all core metrics and dimensional slices needed to fully answer R1–R5.
 
 Does the dimensional model contain elements that are not justified by the analytical requirements? No. Every table and attribute directly supports at least one defined business requirement.
